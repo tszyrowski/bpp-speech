@@ -27,9 +27,9 @@ def record_mic():
     form_1 = pyaudio.paInt16  # 16-bit resolution
     chans = 1  # 1 channel
     samp_rate = 44100  # 44.1kHz sampling rate
-    chunk = 1024  # 2^12 samples for buffer
+    chunk = 1024 * 2  # 2^12 samples for buffer
     record_secs = 3  # seconds to record
-    dev_index = 1  # device index found by p.get_device_info_by_index(ii)
+    dev_index = 0  # device index found by p.get_device_info_by_index(ii)
     wav_output_filename = 'test1.wav'  # name of .wav file
 
     with noalsaerr():
@@ -53,7 +53,7 @@ def record_mic():
 
     # loop through stream and append audio chunks to frame array
     for ii in range(0, int((samp_rate / chunk) * record_secs)):
-        data = stream.read(chunk)
+        data = stream.read(chunk, exception_on_overflow = False)
         frames.append(data)
 
     print("finished recording")
@@ -66,7 +66,7 @@ def record_mic():
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H_%M_%S")
     filename = f"./mic_output_{timestamp}.wav"
     # save the audio frames as .wav file
-    with open(filename, "wb") as wavefile:
+    with wave.open(filename, "wb") as wavefile:
         wavefile.setnchannels(chans)
         wavefile.setsampwidth(audio.get_sample_size(form_1))
         wavefile.setframerate(samp_rate)

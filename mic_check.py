@@ -32,19 +32,31 @@ for i in range(p.get_device_count()):
         f"output= {p.get_device_info_by_index(i).get('maxOutputChannels')}"
     )
 
+mic_device = None
+
 for j in range(p.get_host_api_count()):
     info = p.get_host_api_info_by_index(j)
     numdevices = info.get('deviceCount')
     print(f"--Host Api {j} name: {info.get('name')}, with {numdevices} devices")
     for i in range(0, numdevices):
-        if (
-            p.get_device_info_by_host_api_device_index(j, i).get(
-                'maxInputChannels'
-            )
-        ) > 0:
+        curr_device = p.get_device_info_by_host_api_device_index(j, i)
+        if (curr_device.get('maxInputChannels')) > 0:
+            idx = curr_device.get('index')
+            name = curr_device.get('name')
             print(
-                f"Input Device id {i} - index: "
-                f"{p.get_device_info_by_host_api_device_index(j, i).get('index')}"
-                " "
-                f"{p.get_device_info_by_host_api_device_index(j, i).get('name')}"
+                f"Input Device id {i} - index: {idx}; name: {name}"
             )
+            if "USB PnP" in name:
+                mic_device = curr_device
+
+print(
+    "Microphone to use: "
+    f"{curr_device.get('index')}: {curr_device.get('name')}"
+)
+for k, v in curr_device.items():
+    print(f"\t{k}: {v}")
+
+print(
+    "Default input device: "
+    f"{p.get_default_input_device_info()}"
+)
