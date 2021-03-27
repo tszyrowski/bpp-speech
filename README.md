@@ -26,4 +26,7 @@ with `Driver=snd-usb-audio`
 To install python package follow: 
 https://makersportal.com/blog/2018/8/23/recording-audio-on-the-raspberry-pi-with-python-and-a-usb-microphone
 
-The initialisation of `pyaudio.PyAudio()` can give large tracback saying it does not recognise devices or find files for a particular 
+The initialisation of `pyaudio.PyAudio()` can give large tracback saying it does not recognise devices or find files for a particular
+
+The warnings are caused by config file. Further instructions:
+https://stackoverflow.com/questions/7088672/pyaudio-working-but-spits-out-error-messages-each-time/17673011#17673011
