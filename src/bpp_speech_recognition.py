@@ -1,8 +1,8 @@
 import speech_recognition as sr
 
 
-last_cmd = ["last", "lost", "lust", "loose"]
-average_cmd = ["average"]
+last_cmd = ["last", "lost", "lust", "loose", "us"]
+average_cmd = ["average", "coverage"]
 
 def call_ask_for_cmd():
     """Call welcome and speech command request."""
@@ -34,10 +34,12 @@ def bpp_recognise():
     r = sr.Recognizer()
     with sr.Microphone() as source:
         # handle ambient noise, analyzes the audio source for one second
-        r.adjust_for_ambient_noise(source)
+        # r.adjust_for_ambient_noise(source)
         call_ask_for_cmd()
         # records input from the source until silence is detected.
-        audio = r.listen(source)
+        # Will stop if nothing detected for 5 seconds or
+        # after 15 seconds of listening
+        audio = r.listen(source, timeout=5, phrase_time_limit=15)
 
     # recognize speech using Sphinx
     try:

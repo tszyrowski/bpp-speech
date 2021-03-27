@@ -6,6 +6,8 @@ The speech to text is a separated part of the system allowing to catch voice com
 
 # Installing hardware.
 
+## Microphone hardware
+
 To verify the USB microphone is connected run: 
 `lsusb -t` 
 the command should display output including lines as:
@@ -29,9 +31,9 @@ The initialisation of `pyaudio.PyAudio()` can give large tracback saying it does
 
 The warnings are caused by config file. [Further instructions](https://stackoverflow.com/questions/7088672/pyaudio-working-but-spits-out-error-messages-each-time/17673011#17673011)
 
-# Speech Recognition
+## Speech Recognition
 
-The speech recognition (SR) is used with python's [SpeecRecognition](https://pypi.org/project/SpeechRecognition/) and can be fins on [GitHub](https://github.com/Uberi/speech_recognition).
+The speech recognition (SR) is used with python's [SpeecRecognition](https://pypi.org/project/SpeechRecognition/) and the [code](https://github.com/Uberi/speech_recognition/blob/master/speech_recognition/__init__.py) can be find on [GitHub](https://github.com/Uberi/speech_recognition) .
 The SR can be analysed with offline tools  
 The module can give error on the first line:
 
@@ -48,11 +50,28 @@ Traceback (most recent call last):
     raise OSError("FLAC conversion utility not available - consider installing the FLAC command line application by running `apt-get install flac` or your operating system's equivalent")
 OSError: FLAC conversion utility not available - consider installing the FLAC command line application by running `apt-get install flac` or your operating system's equivalent
 ```
-probably not needed: `sudo apt-get install -qq swig libpulse-dev`
+update system and install offline sphinx in you python interpreter space:
 
-`sudo apt-get install flac`
+`sudo apt-get install flac`  
 `pip install pocketsphinx`
 
-# Speech recognition engine
+## Speech recognition engine
 
 The SR relies on offline engine [CMU Sphinx](https://cmusphinx.github.io/wiki/). Although results are of lower quality than online engines. They are only a few, which can be used offline succesfully.
+
+# Usage
+
+The module provide basic fucnction for speech recognition. The function can be called with python interpreter: `python bpp_speech_recognition.py`  
+After the function invocation:
+- the default microphone input is initialised,
+- the microphone ambiet noise is adjusted for one second,
+- the voice command asking for input and stdout request is given,
+- the microphone input is listen to, until silence is detected. The function exits if no speech detected for 5 seconds or after 15 seconds of listening.
+- the speech is reconginsed,
+- the recognised speech is matched against a pattern to decide next step.
+- if the pattern is dectected, the appropriate function is called, otherwise a user is informed on lack of recognition.
+- the software exits.
+
+## Adding pattern.
+
+At current version there are only a few patterns and all the call functions are grouped in the main module. To add additional pattern, the list of word and function call needs to be added.
