@@ -1,4 +1,4 @@
-# bpp-speech-to-text
+# bpp-speech
 
 # speech to text 
 
@@ -13,7 +13,7 @@ sudo apt-get install libportaudio0 libportaudio2 libportaudiocpp0 portaudio19-de
 sudo apt-get install bison libasound2-dev swig libpulse-dev
 sudo apt-get install flac
 . ~/bpp/venv/bin/activate
-cd ~/bpp/bpp-speech-to-text
+cd ~/bpp/bpp-speech
 pip install -r requirements.txt
 ```
 
@@ -107,7 +107,7 @@ After the function invocation:
 After installation test by running:
 
 ```bash
-cd ~/bpp/bpp-speech-to-text/src/bpp_speech_to_text
+cd ~/bpp/bpp-speech/src/bpp_speech
 python manual_test_speech_recognition.py
 ```
 Say command!

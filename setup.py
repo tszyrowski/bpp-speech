@@ -6,7 +6,7 @@ import setuptools
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 
-VERSION_PY = ["src", "bpp_speech_to_text", "version.py"]
+VERSION_PY = ["src", "bpp_speech", "version.py"]
 
 
 def read(*args):

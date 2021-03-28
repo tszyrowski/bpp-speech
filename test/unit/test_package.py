@@ -8,7 +8,7 @@ def test_import():
     # a long traceback with exceptions raised during outer exception handling.
     exception = None
     try:
-        importlib.import_module("bpp_reader")
+        importlib.import_module("bpp_speech")
     except ModuleNotFoundError as err:
         exception = err
 

@@ -1,11 +1,11 @@
 [paths]
 source =
-   src/bpp_speech_to_text
-   */site-packages/bpp_speech_to_text
+   src/bpp_speech
+   */site-packages/bpp_speech
 
 [run]
 branch = true
-source = bpp_speech_to_text
+source = bpp_speech
 parallel = true
 concurrency = multiprocessing
 
