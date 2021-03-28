@@ -1,0 +1,5 @@
+include requirements.txt
+include README.md
+graft test
+include tox.ini
+global-exclude *.py[cod]

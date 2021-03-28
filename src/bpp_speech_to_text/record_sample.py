@@ -1,4 +1,4 @@
-from ctypes import *
+from ctypes import *  # noqa: F403
 from contextlib import contextmanager
 import datetime
 
@@ -6,23 +6,30 @@ import pyaudio
 import wave
 
 # Recatching warnings from pyaudio ALSA
-ERR_HANDLER_ALSA = CFUNCTYPE(None, c_char_p, c_int, c_char_p, c_int, c_char_p)
+ERR_HANDLER_ALSA = CFUNCTYPE(  # noqa:F405
+    None, c_char_p, c_int, c_char_p, c_int, c_char_p  # noqa:F405
+)
+
 
 def py_error_handler(filename, line, function, err, fmt):
+    """Skip ALSA error."""
     pass
+
 
 c_error_handler = ERR_HANDLER_ALSA(py_error_handler)
 
+
 @contextmanager
 def noalsaerr():
-    asound = cdll.LoadLibrary('libasound.so')
+    """Wrap ALSA error."""
+    asound = cdll.LoadLibrary('libasound.so')  # noqa: F841,F405
     asound.snd_lib_error_set_handler(c_error_handler)
     yield
     asound.snd_lib_error_set_handler(None)
 
 
 def record_mic():
-    """Record mic output to wac file"""
+    """Record mic output to wac file."""
     # Create mic pamas
     form_1 = pyaudio.paInt16  # 16-bit resolution
     chans = 1  # 1 channel
@@ -30,11 +37,10 @@ def record_mic():
     chunk = 1024 * 2  # 2^12 samples for buffer
     record_secs = 3  # seconds to record
     dev_index = 0  # device index found by p.get_device_info_by_index(ii)
-    wav_output_filename = 'test1.wav'  # name of .wav file
 
     with noalsaerr():
         try:
-            audio = pyaudio.PyAudio() # create pyaudio instantiation
+            audio = pyaudio.PyAudio()  # create pyaudio instantiation
         except Exception as e:
             print("*** ", e)
 
@@ -53,7 +59,7 @@ def record_mic():
 
     # loop through stream and append audio chunks to frame array
     for ii in range(0, int((samp_rate / chunk) * record_secs)):
-        data = stream.read(chunk, exception_on_overflow = False)
+        data = stream.read(chunk, exception_on_overflow=False)
         frames.append(data)
 
     print("finished recording")

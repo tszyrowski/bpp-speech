@@ -10,7 +10,7 @@ The speech to text is a separated part of the system allowing to catch voice com
 
 ```bash
 sudo apt-get install libportaudio0 libportaudio2 libportaudiocpp0 portaudio19-dev
-sudo apt-get install bison libasound2-dev swig
+sudo apt-get install bison libasound2-dev swig libpulse-dev
 sudo apt-get install flac
 . ~/bpp/venv/bin/activate
 cd ~/bpp/bpp-speech-to-text
@@ -105,8 +105,15 @@ After the function invocation:
 - the software exits.
 
 After installation test by running:
-cd ~/bpp/bpp-speech-to-text/src
-python 
+
+```bash
+cd ~/bpp/bpp-speech-to-text/src/bpp_speech_to_text
+python manual_test_speech_recognition.py
+```
+Say command!
+
+**if:**
+Sphinx error; missing PocketSphinx module: ensure that PocketSphinx is set up correctly.
 
 ## Adding pattern.
 

@@ -4,29 +4,36 @@ import speech_recognition as sr
 last_cmd = ["last", "lost", "lust", "loose", "us"]
 average_cmd = ["average", "coverage"]
 
+
 def call_ask_for_cmd():
     """Call welcome and speech command request."""
     print("Say command!")
+
 
 def call_last_reading():
     """Call function reading last reading."""
     print("RETURNING LAST READINGS")
 
+
 def call_average_reading():
     """Call function returning average."""
     print("RETURNING AVERAGE READINGS")
+
 
 def call_cannot_understand(speech_cmd):
     """Call function informing sentence does not much possiblities."""
     print(f"can not understand, did you say: {speech_cmd}")
 
+
 def call_unrecognised_cmd():
     """Call speech did not much any recognaisable input."""
     print("Sphinx could not understand audio")
 
+
 def call_general_error(e):
     """Call general output occured."""
     print("Sphinx error; {0}".format(e))
+
 
 def bpp_recognise():
     """Recognise command from microphone."""
@@ -56,6 +63,7 @@ def bpp_recognise():
         call_unrecognised_cmd()
     except sr.RequestError as e:
         call_general_error(e)
+
 
 if __name__ == "__main__":
     bpp_recognise()
