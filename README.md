@@ -1,6 +1,13 @@
 # bpp-speech
 
-# speech to text 
+Package contains functionality related to voice commands to and from Raspberry Pi.
+It includes:
+- speech to text: speech recognition
+- text to speech: speech synthesis
+- button callback: to invoke speech recognition call
+
+**speech to text**
+==================
 
 The speech to text is a separated part of the system allowing to catch voice commands.
 
@@ -118,3 +125,55 @@ Sphinx error; missing PocketSphinx module: ensure that PocketSphinx is set up co
 ## Adding pattern.
 
 At current version there are only a few patterns and all the call functions are grouped in the main module. To add additional pattern, the list of word and function call needs to be added.
+
+**bpp-text-to-speech**
+======================
+
+# text to speech
+
+The text to speech is a separated part of the system allowing voice feedback.
+The best voice quaility for off-line speech synthesis was mased on **mimic** procject:
+https://github.com/MycroftAI/mimic1
+
+## Installation on Raspberry pi (3 B):
+
+On a native build (not cross-compilation)
+Clone the repository
+
+    $ git clone https://github.com/MycroftAI/mimic1.git
+
+Navigate to mimic directory
+
+    $ cd mimic1
+
+Build and install missing dependencies (pcre2), generate mimic build scripts and configure.
+
+    $ ./dependencies.sh --prefix="/usr/local"
+    $ ./autogen.sh
+    $ ./configure --prefix="/usr/local"
+
+Build and Check
+
+    $ make
+    $ make check
+
+## Command:
+
+	pi@raspberrypi:~/bpp/mimic1 $ ./mimic -t "Hello there, this is cmd. The oxygene level was 95 % and the hartrate was 80 bpm." -voice ap
+	pi@raspberrypi:~/bpp/mimic1 $ ./mimic -t "Hello there, this is cmd. The oxygene level was 95 % and the hartrate was 80 bpm." -voice slt
+	pi@raspberrypi:~/bpp/mimic1 $ ./mimic -t "Hello there, this is cmd. The oxygene level was 95 % and the hartrate was 80 bpm." -voice slt_hts
+	pi@raspberrypi:~/bpp/mimic1 $ ./mimic -t "Hello there, this is cmd. The oxygene level was 95 % and the hartrate was 80 bpm." -voice kal
+	pi@raspberrypi:~/bpp/mimic1 $ ./mimic -t "Hello there, this is cmd. The oxygene level was 95 % and the hartrate was 80 bpm." -voice awb
+	pi@raspberrypi:~/bpp/mimic1 $ ./mimic -t "Hello there, this is cmd. The oxygene level was 95 % and the hartrate was 80 bpm." -voice kal16
+	pi@raspberrypi:~/bpp/mimic1 $ ./mimic -t "Hello there, this is cmd. The oxygene level was 95 % and the hartrate was 80 bpm." -voice rms
+
+# Other engines to try:
+
+https://pypi.org/project/espeakng/
+http://espeak.sourceforge.net/voices.html
+
+## Addtional voices:
+
+https://github.com/espeak-ng/espeak-ng/blob/master/docs/mbrola.md#voice-names
+
+
