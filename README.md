@@ -114,7 +114,7 @@ After the function invocation:
 After installation test by running:
 
 ```bash
-cd ~/bpp/bpp-speech/src/bpp_speech
+cd ~/bpp/bpp-speech/test/manual
 python manual_test_speech_recognition.py
 ```
 Say command!
