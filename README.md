@@ -6,6 +6,38 @@ The speech to text is a separated part of the system allowing to catch voice com
 
 # Installing hardware.
 
+## Quickstartguide
+
+```bash
+sudo apt-get install libportaudio0 libportaudio2 libportaudiocpp0 portaudio19-dev
+sudo apt-get install bison libasound2-dev swig
+sudo apt-get install flac
+. ~/bpp/venv/bin/activate
+cd ~/bpp/bpp-speech-to-text
+pip install -r requirements.txt
+```
+
+If the above exit with error follow manual installtiaon of [pocketsphinx](https://howchoo.com/pi/how-to-install-pocketsphinx-on-a-raspberry-pi)
+
+```bash
+mkdir site_installs
+cd site_installs/
+wget https://sourceforge.net/projects/cmusphinx/files/sphinxbase/5prealpha/sphinxbase-5prealpha.tar.gz/download -O sphinxbase.tar.gz
+wget https://sourceforge.net/projects/cmusphinx/files/pocketsphinx/5prealpha/pocketsphinx-5prealpha.tar.gz/download -O pocketsphinx.tar.gz
+tar -xzvf sphinxbase.tar.gz
+tar -xzvf pocketsphinx.tar.gz
+sudo apt-get install bison libasound2-dev swig
+cd sphinxbase-5prealpha
+./configure --enable-fixed
+make
+sudo make install
+cd ../pocketsphinx-5prealpha
+./configure
+make
+sudo make install
+src/programs/pocketsphinx_continuous -samprate 48000 -inmic yes
+```
+
 ## Microphone hardware
 
 To verify the USB microphone is connected run: 
@@ -71,6 +103,10 @@ After the function invocation:
 - the recognised speech is matched against a pattern to decide next step.
 - if the pattern is dectected, the appropriate function is called, otherwise a user is informed on lack of recognition.
 - the software exits.
+
+After installation test by running:
+cd ~/bpp/bpp-speech-to-text/src
+python 
 
 ## Adding pattern.
 
