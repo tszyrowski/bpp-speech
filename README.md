@@ -168,6 +168,17 @@ Build and Check
     $ make
     $ make check
 
+If make does faile with error like:
+```bash
+  CC       lang/vid_gb_ap/libttsmimic_lang_vid_gb_ap_la-vid_gb_ap_cg_01_params.lo
+gcc: fatal error: Killed signal terminated program cc1
+compilation terminated.
+make[1]: *** [Makefile:4475: lang/vid_gb_ap/libttsmimic_lang_vid_gb_ap_la-vid_gb_ap_cg_01_params.lo] Error 1
+make[1]: Leaving directory '/home/pi/bpp/mimic1'
+make: *** [Makefile:4806: all-recursive] Error 1
+```
+It is likely to be memory issue and can be solved by adding [swap](https://elsmorian.com/post/23366148056/basic-raspberry-pi-setup)
+
 ## Command:
 
 	pi@raspberrypi:~/bpp/mimic1 $ ./mimic -t "Hello there, this is cmd. The oxygene level was 95 % and the hartrate was 80 bpm." -voice ap
