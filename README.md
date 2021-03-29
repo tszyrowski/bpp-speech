@@ -179,6 +179,26 @@ make: *** [Makefile:4806: all-recursive] Error 1
 ```
 It is likely to be memory issue and can be solved by adding [swap](https://elsmorian.com/post/23366148056/basic-raspberry-pi-setup)
 
+check where the disc is mounted: `df -h` you are looking for entry like:
+```bash
+Filesystem      Size  Used Avail Use% Mounted on
+...
+/dev/mmcblk0p1  253M   49M  204M  20% /boot
+```
+Run resizing command:
+```bash
+sudo dd if=/dev/zero of=/var/swapfile bs=1M count=128
+sudo mkswap /var/swapfile
+sudo swapon /var/swapfile
+sudo reboot
+```
+afer reboot:
+```bash
+sudo nano /etc/fstab
+/dev/mmcblk0p2  /       ext4    defaults,noatime,nodiratime     0 0
+/var/swapfile   none    swap    sw                              0 0
+```
+
 ## Command:
 
 	pi@raspberrypi:~/bpp/mimic1 $ ./mimic -t "Hello there, this is cmd. The oxygene level was 95 % and the hartrate was 80 bpm." -voice ap
