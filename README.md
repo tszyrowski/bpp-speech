@@ -149,6 +149,17 @@ Navigate to mimic directory
 Build and install missing dependencies (pcre2), generate mimic build scripts and configure.
 
     $ ./dependencies.sh --prefix="/usr/local"
+
+expected output:
+```bash
+ /usr/bin/install -c -m 644 libpcre2-8.pc libpcre2-posix.pc '/usr/local/lib/pkgconfig'
+make[2]: Leaving directory '/home/pi/bpp/mimic1/build/thirdparty/build_pcre2'
+make[1]: Leaving directory '/home/pi/bpp/mimic1/build/thirdparty/build_pcre2'
+PCRE2 installation succeeded
+```
+if errored: 
+`sudo apt-get install libtool libtool-bin autoconf`
+
     $ ./autogen.sh
     $ ./configure --prefix="/usr/local"
 
