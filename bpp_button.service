@@ -9,9 +9,7 @@ StandardOutput=journal
 StandardError=null
 Type=simple
 User=pi
-WorkingDirectory=/home/bpp
-Environment=OPENBLAS_NUM_THREADS=1
-ExecStart=/home/bpp/bpp-speech
+ExecStart=/home/pi/bpp/vevn/vBpp/bin/python /home/pi/bpp/bpp-speech/src/bpp_speech/bpp_btn.py
 Restart=always
 RestartSec=1
 
