@@ -219,3 +219,11 @@ http://espeak.sourceforge.net/voices.html
 https://github.com/espeak-ng/espeak-ng/blob/master/docs/mbrola.md#voice-names
 
 
+# Install and Setup systemd
+
+    sudo cp ~/bpp/bpp-speech/bpp_button.service /lib/systemd/system/bpp_button.service
+    sudo systemctl daemon-reload
+    sudo systemctl enable bpp_button.service
+    sudo systemctl start bpp_button.service
+
+

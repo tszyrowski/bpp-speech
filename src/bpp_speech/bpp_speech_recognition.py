@@ -1,4 +1,5 @@
 import speech_recognition as sr
+import speech_feedback
 
 
 last_cmd = ["last", "lost", "lust", "loose", "us"]
@@ -46,7 +47,7 @@ def bpp_recognise():
         # records input from the source until silence is detected.
         # Will stop if nothing detected for 5 seconds or
         # after 15 seconds of listening
-        audio = r.listen(source, timeout=5, phrase_time_limit=15)
+        audio = r.listen(source, timeout=2, phrase_time_limit=8)
 
     # recognize speech using Sphinx
     try:
